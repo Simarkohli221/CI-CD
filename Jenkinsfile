@@ -1,23 +1,34 @@
-pipeline {
-    agent any
+ node {
+ try {
 
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building project...'
-            }
-        }
+ stage('Build') {
+ sh '''
+ echo "Building project..."
+ ls
+ echo "Build successful"
+ '''
+ }
 
-        stage('Test') {
-            steps {
-                echo 'Running tests...'
-            }
-        }
+ stage('Test') {
+ sh '''
+ echo "Running tests..."
+ echo "Tests completed"
+ '''
+ }
 
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application...'
-            }
-        }
-    }
+ stage('Deploy') {
+ sh '''
+ echo "Deploying application..."
+ echo "Deployment successful"
+ '''
+ }
+
+ echo "Pipeline executed successfully!"
+
+ } catch (Exception e) {
+
+ echo "Pipeline failed!"
+ throw e
+
+ }
 }
